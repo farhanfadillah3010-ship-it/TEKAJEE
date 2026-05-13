@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XI TJKT | SMK Bina Sejahtera 1</title>
+    
+    <!-- Google Fonts: Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #1b4332; /* Hijau Tua Premium */
+            --secondary: #2d6a4f;
+            --accent: #74c69d;
+            --dark: #081c15;
+            --white: #ffffff;
+            --bg-light: #f4f7f6;
+            --transition: all 0.3s ease;
+        }
+
+        /* Dark Mode variables */
+        body.dark-mode {
+            --bg-light: #121212;
+            --white: #1e1e1e;
+            color: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+            transition: var(--transition);
+        }
+
+        /* --- Header --- */
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+        }
+
+        header h1 { font-size: 3rem; font-weight: 700; margin-bottom: 10px; }
+        header p { font-size: 1.2rem; opacity: 0.9; }
+        .slogan { 
+            display: inline-block;
+            margin-top: 15px;
+            padding: 5px 20px;
+            border: 1px solid var(--accent);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        body.dark-mode nav { background: #1a1a1a; }
+
+        .nav-links { display: flex; list-style: none; }
+        .nav-links a {
+            text-decoration: none;
+            color: inherit;
+            font-weight: 500;
+            margin-left: 30px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .theme-toggle { cursor: pointer; font-size: 1.2rem; }
+
+        /* --- Structure Cards --- */
+        section { padding: 80px 8%; }
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .card.show { opacity: 1; transform: translateY(0); }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(45, 106, 79, 0.2);
+        }
+
+        .card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            margin-bottom: 20px;
+            object-fit: cover;
+        }
+
+        .card h3 { color: var(--primary); margin-bottom: 5px; }
+        .card .job { font-size: 0.9rem; font-weight: 600; color: var(--accent); margin-bottom: 15px; display: block; }
+        .card .motto { font-size: 0.85rem; font-style: italic; color: #777; }
+
+        /* --- Table --- */
+        .table-res { overflow-x: auto; margin-top: 30px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        th, td { padding: 20px; text-align: center; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        th { background: var(--primary); color: white; }
+        tr:hover { background: rgba(116, 198, 157, 0.1); }
+
+        /* --- Gallery --- */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .gallery-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .gallery-img:hover { transform: scale(1.05); filter: brightness(80%); }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .socials { margin-top: 20px; }
+        .socials a { color: white; margin: 0 10px; font-size: 1.5rem; }
+
+        /* --- Back to Top --- */
+        #btnTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 999;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div style="font-weight: 700; color: var(--primary); font-size: 1.4rem;">TJKT BISE 1</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#struktur">Struktur</a></li>
+            <li><a href="#jadwal">Jadwal</a></li>
+            <li><a href="#galeri">Galeri</a></li>
+        </ul>
+        <div class="theme-toggle" onclick="toggleDarkMode()">
+            <i class="fas fa-moon" id="themeIcon"></i>
+        </div>
+    </nav>
+
+    <header>
+        <p>Selamat Datang di Website Resmi</p>
+        <h1>Struktur Kelas XI TJKT</h1>
+        <p>SMK Bina Sejahtera 1</p>
+        <div class="slogan">Solid • Disiplin • Profesional</div>
+    </header>
+
+    <section id="struktur">
+        <h2 class="section-title">Struktur Organisasi</h2>
+        <div class="grid">
+            <!-- Jabatan-Jabatan -->
+            <div class="card">
+                <img src="https://i.pravatar.cc/150?u=ketua" alt="Ketua">
+                <h3>Nama Ketua</h3>
+                <span class="job">Ketua Kelas</span>
+                <p class="motto">"Berani memimpin, siap melayani."</p>
+            </div>
+            <div class="card">
+                <img src="https://i.pravatar.cc/150?u=wakil" alt="Wakil">
+                <h3>Nama Wakil</h3>
+                <span class="job">Wakil Ketua</span>
+                <p class="motto">"Membangun kerjasama yang solid."</p>
+            </div>
+            <div class="card">
+                <img src="https://i.pravatar.cc/150?u=sekretaris" alt="Sekretaris">
+                <h3>Nama Sekretaris</h3>
+                <span class="job">Sekretaris</span>
+                <p class="motto">"Rapi dalam data, tepat dalam aksi."</p>
+            </div>
+            <div class="card">
+                <img src="https://i.pravatar.cc/150?u=bendahara" alt="Bendahara">
+                <h3>Nama Bendahara</h3>
+                <span class="job">Bendahara</span>
+                <p class="motto">"Kejujuran adalah modal utama."</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="jadwal" style="background: rgba(116, 198, 157, 0.05);">
+        <h2 class="section-title">Jadwal Piket</h2>
+        <div class="table-res">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Senin</th>
+                        <th>Selasa</th>
+                        <th>Rabu</th>
+                        <th>Kamis</th>
+                        <th>Jumat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Siswa A, B, C</td>
+                        <td>Siswa D, E, F</td>
+                        <td>Siswa G, H, I</td>
+                        <td>Siswa J, K, L</td>
+                        <td>Siswa M, N, O</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="galeri">
+        <h2 class="section-title">Galeri Kelas</h2>
+        <div class="gallery">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=500" class="gallery-img">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=500" class="gallery-img">
+            <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=500" class="gallery-img">
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=500" class="gallery-img">
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 XI TJKT SMK Bina Sejahtera 1</p>
+        <div class="socials">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+        </div>
+    </footer>
+
+    <button id="btnTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        // --- Dark Mode ---
+        function toggleDarkMode() {
+            const body = document.body;
+            const icon = document.getElementById('themeIcon');
+            body.classList.toggle('dark-mode');
+            if(body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        }
+
+        // --- Scroll Animation ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.card').forEach(c => observer.observe(c));
+
+        // --- Back to Top ---
+        window.onscroll = function() {
+            let btn = document.getElementById("btnTop");
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
+</body>
+</html>
